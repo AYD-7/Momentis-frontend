@@ -5,19 +5,21 @@ import { Calendar, Zap, QrCode, } from "lucide-react"
 const WorksHome = () => {
   return (
     <section
-      className="overflow-hidden flex"
+      className="overflow-hidden flex "
       style={{
         backgroundColor: "var(--bg)",
         paddingBlock: "5rem",
+        // paddingInline: "1.5rem"
       }}
     >
       <div
-        className="max-w-6xl mx-auto px-6"
+        className="max-w-6xl px-6"
         style={{
           display: "flex",
           flexDirection: "column",
           gap: "64px",
           marginInline: "auto",
+
         }}
       >
         <div
@@ -37,7 +39,7 @@ const WorksHome = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="w-screen lg:w-2/3 text-center flex flex-col gap-12px lg:gap-18px items-center lg:items-start"
+              className="w-screen md:w-2/3 text-center flex flex-col gap-12px md:gap-18px items-center md:items-start"
             >
               <p
                 className="text-xs font-bold uppercase tracking-[0.3em]"
@@ -50,7 +52,7 @@ const WorksHome = () => {
                 className="font-bold text-4xl leading-tight"
                 style={{ color: "var(--ink)" }}
               >
-                How it <br className="hidden lg:block" />
+                How it <br className="hidden md:block" />
                 works
               </h2>
 

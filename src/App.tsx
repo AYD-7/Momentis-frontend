@@ -10,11 +10,13 @@ import TicketLookupPage from './pages/TicketLookupPage';
 import ValidatePage from './pages/ValidatePage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 function AppRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
+      <ScrollToTop />
       <Routes location={location} key={location.pathname}>
         <Route path="/"              element={<HomePage />} />
         <Route path="/events"        element={<EventsPage />} />

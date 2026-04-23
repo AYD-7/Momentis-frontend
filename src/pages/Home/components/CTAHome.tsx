@@ -48,7 +48,7 @@ const CTAHome = () => {
         }}
       >
         <div
-          className="flex flex-col lg:flex-row items-start lg:items-end justify-between"
+          className="flex flex-col md:flex-row items-start md:items-end justify-between"
           style={{ gap: "40px" }}
         >
           <div

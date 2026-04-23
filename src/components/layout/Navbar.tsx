@@ -37,7 +37,7 @@ export default function Navbar() {
           backdropFilter: scrolled ? 'blur(12px)' : 'none',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" style={{marginInline: "auto"}}>
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">

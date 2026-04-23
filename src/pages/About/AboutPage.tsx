@@ -13,8 +13,11 @@ export default function AboutPage() {
       style={{
         backgroundColor: "var(--bg)",
         paddingTop: "5rem", // layout fix
+        overflowX: "hidden",
+        overflowWrap: "break-word"
       }}
     >
+
 
       {/* HERO */}
       <HeroAbout />

@@ -63,7 +63,7 @@ const TechAbout = () => {
           className="grid"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(100%,1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
             gap: "2rem", // FIX gap
           }}
         >

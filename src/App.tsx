@@ -8,7 +8,7 @@ import EventsPage from './pages/EventsPage';
 import EventDetailPage from './pages/EventDetailPage';
 import TicketLookupPage from './pages/TicketLookupPage';
 import ValidatePage from './pages/ValidatePage';
-import AboutPage from './pages/AboutPage';
+import AboutPage from './pages/About/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ScrollToTop from './components/layout/ScrollToTop';
 

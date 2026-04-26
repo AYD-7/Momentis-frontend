@@ -10,17 +10,15 @@ import EventCard from '../../../components/ui/EventCard'
 
 
 const EventsHome = () => {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    const [events, setEvents] = useState<Event[]>([]);
-      const [loading, setLoading] = useState(true);
-     
-    
-      useEffect(() => {
-        getAllEvents()
-          .then((res) => setEvents(res.data.data.slice(0, 4)))
-          .catch(console.error)
-          .finally(() => setLoading(false));
-      }, []);
+  useEffect(() => {
+    getAllEvents()
+      .then((res) => setEvents(res.data.data.slice(0, 4)))
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <section
@@ -37,7 +35,7 @@ const EventsHome = () => {
         }}
       >
         {/* Header */}
-        <div className="flex justify-center lg:justify-between items-end text-center lg:text-start flex-wrap mb-20 gap-16 lg:gap-4 ">
+        <div className="flex justify-center lg:justify-between items-end text-center lg:text-start flex-wrap gap-16 lg:gap-4 " style={{marginBottom: "5rem"}}>
           <div>
             <motion.p
               initial={{ opacity: 0, x: -10 }}

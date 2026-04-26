@@ -47,11 +47,12 @@ export default function EventsPage() {
 
   return (
     <div
-      className="min-h-screen"
+      className="min-h-screen w-5/6 lg:w-full"
       style={{
         backgroundColor: "var(--bg)",
         paddingTop: "6rem",
         paddingBottom: "4rem",
+        marginInline: "auto",
       }}
     >
       <div

@@ -9,11 +9,11 @@ export default defineConfig(({ mode }) => {
     plugins: [react(), tailwindcss()],
     server: {
       proxy: {
-        '/api': {
-          target: env.VITE_BACKEND_URL,
+        "/api": {
+          target: env.VITE_BACKEND_URL || 'http://localhost:5000',
           changeOrigin: true,
         },
       },
     },
-  }
+  };
 })

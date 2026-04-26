@@ -1,13 +1,15 @@
 import axios from 'axios';
 import type { ApiResponse, Event, Registration, Ticket, RegistrationFormData, RegistrationResult } from '../types';
 
+const BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: `${BASE_URL}/api`,
   headers: { 'Content-Type': 'application/json' },
 });
 
 const adminApi = axios.create({
-  baseURL: '/api/admin',
+  baseURL: `${BASE_URL}/api/admin`,
   headers: {
     'Content-Type': 'application/json',
     'x-admin-key': import.meta.env.VITE_ADMIN_KEY || 'admin123',

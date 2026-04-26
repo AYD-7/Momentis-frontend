@@ -24,7 +24,7 @@ export default function EventDetailPage() {
 
   if (loading) return <div className="pt-24"><Spinner text="Loading event..." /></div>;
 
-  if (!event) {
+  if (!event) { 
     return (
       <div className="min-h-screen pt-24 flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="text-center">

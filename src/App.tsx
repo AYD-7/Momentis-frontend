@@ -6,7 +6,7 @@ import Footer from './components/layout/Footer';
 import HomePage from './pages/Home/HomePage';
 import EventsPage from './pages/Events/EventsPage';
 import EventDetailPage from './pages/EventDetails/EventDetailPage';
-import TicketLookupPage from './pages/TicketLookupPage';
+import TicketLookupPage from './pages/TicketLookup/TicketLookupPage';
 import ValidatePage from './pages/ValidatePage';
 import AboutPage from './pages/About/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';

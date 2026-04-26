@@ -70,7 +70,7 @@ export default function Footer() {
         <div className="border-t mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4"
           style={{ borderColor: 'var(--border)', marginTop: "3rem" }}>
           <p className="text-sm" style={{ color: 'var(--muted)' }}>&copy; {new Date().getFullYear()} Momentis. All rights reserved.</p>
-          <p className="text-sm" style={{ color: 'var(--muted)' }}>By: {" "}<a href="ayodejiaronimo.vercel.app" rel='noreferrer noopener' target='_blank' style={{color: "var(--brand)"}}>A*Y*D</a></p>
+          <p className="text-sm" style={{ color: 'var(--muted)' }}>By: {" "}<a href="https://ayodejiaronimo.vercel.app" rel='noreferrer noopener' target='_blank' style={{color: "var(--brand)"}}>A*Y*D</a></p>
         </div>
       </div>
     </footer>

@@ -11,7 +11,14 @@ interface Props {
 }
 
 export default function RegistrationModal({ event, onClose }: Props) {
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', notes: '' });
+  const [form, setForm] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    notes: ''
+  });
+
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState<RegistrationResult | null>(null);
 
@@ -21,6 +28,7 @@ export default function RegistrationModal({ event, onClose }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
     try {
       const res = await registerForEvent({ eventId: event._id, ...form });
       setSuccess(res.data.data);
@@ -32,11 +40,18 @@ export default function RegistrationModal({ event, onClose }: Props) {
     }
   };
 
-  const inputCls = "w-full border rounded-lg text-sm focus:outline-none transition-colors";
   const inputStyle = {
     backgroundColor: 'var(--bg)',
     borderColor: 'var(--border)',
     color: 'var(--ink)',
+  };
+
+  const inputBase = {
+    width: '100%',
+    padding: '0.75rem 0.75rem 0.75rem 2.5rem',
+    borderRadius: '0.5rem',
+    border: '1px solid var(--border)',
+    ...inputStyle,
   };
 
   return (
@@ -46,118 +61,252 @@ export default function RegistrationModal({ event, onClose }: Props) {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4"
-        style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(6px)' }}
+        style={{
+          position: "fixed",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1rem",
+          backgroundColor: "rgba(0,0,0,0.6)",
+          backdropFilter: "blur(6px)",
+        }}
       >
         <motion.div
           initial={{ opacity: 0, scale: 0.93, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.93 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
           onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl"
-          style={{ backgroundColor: 'var(--bg-card)' }}
+          style={{
+            width: "100%",
+            maxWidth: "32rem",
+            borderRadius: "1rem",
+            overflow: "hidden",
+            backgroundColor: "var(--bg-card)",
+          }}
         >
-          {/* Header */}
-          <div className="px-6 py-5 flex items-start justify-between"
-            style={{ backgroundColor: 'var(--brand)' }}>
+          {/* HEADER */}
+          <div
+            style={{
+              padding: "1.25rem 1.5rem",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              backgroundColor: "var(--brand)",
+            }}
+          >
             <div>
-              <p className="text-white/70 text-xs font-semibold uppercase tracking-widest mb-1">Register</p>
-              <h2 className="font-bold text-white text-xl leading-tight">{event.title}</h2>
+              <p
+                style={{
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  color: "rgba(255,255,255,0.7)",
+                }}
+              >
+                Register
+              </p>
+              <h2 style={{ color: "#fff", fontWeight: 700 }}>{event.title}</h2>
             </div>
-            <button onClick={onClose} className="text-white/60 hover:text-white transition-colors mt-1">
+
+            <button
+              onClick={onClose}
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
               <X size={20} />
             </button>
           </div>
 
           {success ? (
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-8 text-center">
-              <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                style={{ backgroundColor: 'var(--brand-muted)' }}>
-                <CheckCircle size={32} style={{ color: 'var(--brand)' }} />
+            <div style={{ padding: "2rem", textAlign: "center" }}>
+              <div
+                style={{
+                  width: "4rem",
+                  height: "4rem",
+                  borderRadius: "999px",
+                  margin: "0 auto 1rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "var(--brand-muted)",
+                }}
+              >
+                <CheckCircle size={32} style={{ color: "var(--brand)" }} />
               </div>
-              <h3 className="font-bold text-xl mb-2" style={{ color: 'var(--ink)' }}>You're registered!</h3>
-              <p className="text-sm mb-6" style={{ color: 'var(--muted)' }}>
-                Your ticket and QR code have been sent to your email.
+
+              <h3 style={{ fontWeight: 700 }}>You're registered!</h3>
+              <p style={{ color: "var(--muted)", margin: "0.5rem 0 1.5rem" }}>
+                Your ticket has been sent to your email.
               </p>
-              <div className="rounded-xl p-4 mb-6 text-left"
-                style={{ backgroundColor: 'var(--bg-alt)' }}>
-                <p className="text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--muted)' }}>
-                  Your Ticket Code
-                </p>
-                <p className="font-bold text-3xl tracking-widest font-mono" style={{ color: 'var(--brand)' }}>
-                  {success.ticket?.ticketCode}
-                </p>
-              </div>
-              <button onClick={onClose}
-                className="w-full text-white py-3 rounded-xl font-semibold text-sm"
-                style={{ backgroundColor: 'var(--brand)' }}>
+
+              <button
+                onClick={onClose}
+                style={{
+                  width: "100%",
+                  padding: "0.75rem",
+                  borderRadius: "0.75rem",
+                  backgroundColor: "var(--brand)",
+                  color: "#fff",
+                  fontWeight: 600,
+                }}
+              >
                 Done
               </button>
-            </motion.div>
+            </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                {([['firstName', 'First Name', 'Jane'], ['lastName', 'Last Name', 'Doe']] as const).map(([name, label, ph]) => (
-                  <div key={name}>
-                    <label className="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
-                      style={{ color: 'var(--ink)' }}>{label} *</label>
-                    <div className="relative">
-                      <User size={13} className="absolute left-3 top-1/2 -translate-y-1/2"
-                        style={{ color: 'var(--muted)' }} />
-                      <input name={name} value={form[name]} onChange={handle} required placeholder={ph}
-                        className={`${inputCls} pl-9 pr-3 py-2.5`} style={inputStyle} />
+            <form
+              onSubmit={handleSubmit}
+              style={{
+                padding: "1.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+              }}
+            >
+              {/* FIRST + LAST NAME */}
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                {(
+                  [
+                    { name: "firstName", label: "First Name" },
+                    { name: "lastName", label: "Last Name" },
+                  ] as const
+                ).map((field) => (
+                  <div key={field.name} style={{ flex: 1 }}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontSize: "0.75rem",
+                        marginBottom: "0.4rem",
+                        fontWeight: 600,
+                        color: "var(--ink)",
+                      }}
+                    >
+                      {field.label}
+                    </label>
+
+                    <div style={{ position: "relative" }}>
+                      <User
+                        size={13}
+                        style={{
+                          position: "absolute",
+                          left: "0.75rem",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          color: "var(--muted)",
+                        }}
+                      />
+
+                      <input
+                        name={field.name}
+                        value={form[field.name]}
+                        onChange={handle}
+                        placeholder={field.label}
+                        required
+                        style={inputBase}
+                      />
                     </div>
                   </div>
                 ))}
               </div>
 
+              {/* EMAIL */}
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
-                  style={{ color: 'var(--ink)' }}>Email *</label>
-                <div className="relative">
-                  <Mail size={13} className="absolute left-3 top-1/2 -translate-y-1/2"
-                    style={{ color: 'var(--muted)' }} />
-                  <input name="email" type="email" value={form.email} onChange={handle}
-                    required placeholder="jane@example.com"
-                    className={`${inputCls} pl-9 pr-3 py-2.5`} style={inputStyle} />
+                <label style={{ fontSize: "0.75rem", fontWeight: 600 }}>
+                  Email
+                </label>
+                <div style={{ position: "relative", marginTop: "0.4rem" }}>
+                  <Mail
+                    size={13}
+                    style={{
+                      position: "absolute",
+                      left: "0.75rem",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      color: "var(--muted)",
+                    }}
+                  />
+                  <input
+                    name="email"
+                    value={form.email}
+                    onChange={handle}
+                    placeholder="Email"
+                    required
+                    style={inputBase}
+                  />
                 </div>
               </div>
 
+              {/* PHONE */}
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
-                  style={{ color: 'var(--ink)' }}>Phone</label>
-                <div className="relative">
-                  <Phone size={13} className="absolute left-3 top-1/2 -translate-y-1/2"
-                    style={{ color: 'var(--muted)' }} />
-                  <input name="phone" value={form.phone} onChange={handle} placeholder="08012345678"
-                    className={`${inputCls} pl-9 pr-3 py-2.5`} style={inputStyle} />
+                <label style={{ fontSize: "0.75rem", fontWeight: 600 }}>
+                  Phone
+                </label>
+                <div style={{ position: "relative", marginTop: "0.4rem" }}>
+                  <Phone
+                    size={13}
+                    style={{
+                      position: "absolute",
+                      left: "0.75rem",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      color: "var(--muted)",
+                    }}
+                  />
+                  <input
+                    name="phone"
+                    value={form.phone}
+                    onChange={handle}
+                    placeholder="Phone"
+                    style={inputBase}
+                  />
                 </div>
               </div>
 
+              {/* NOTES */}
               <div>
-                <label className="text-xs font-semibold uppercase tracking-wide mb-1.5 block"
-                  style={{ color: 'var(--ink)' }}>Notes (optional)</label>
-                <div className="relative">
-                  <FileText size={13} className="absolute left-3 top-3"
-                    style={{ color: 'var(--muted)' }} />
-                  <textarea name="notes" value={form.notes} onChange={handle} rows={3}
+                <label style={{ fontSize: "0.75rem", fontWeight: 600 }}>
+                  Notes
+                </label>
+                <div style={{ position: "relative", marginTop: "0.4rem" }}>
+                  <FileText
+                    size={13}
+                    style={{
+                      position: "absolute",
+                      left: "0.75rem",
+                      top: "0.75rem",
+                      color: "var(--muted)",
+                    }}
+                  />
+                  <textarea
+                    name="notes"
+                    value={form.notes}
+                    onChange={handle}
                     placeholder="Any special requirements..."
-                    className={`${inputCls} pl-9 pr-3 py-2.5 resize-none`} style={inputStyle} />
+                    rows={3}
+                    style={{
+                      ...inputBase,
+                      paddingTop: "0.75rem",
+                      resize: "none",
+                    }}
+                  />
                 </div>
               </div>
 
-              <motion.button type="submit" disabled={loading}
-                whileHover={{ scale: loading ? 1 : 1.01 }}
-                whileTap={{ scale: loading ? 1 : 0.98 }}
+              {/* SUBMIT */}
+              <motion.button
+                type="submit"
+                disabled={loading}
                 className="w-full text-white py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 disabled:opacity-60"
-                style={{ backgroundColor: 'var(--brand)' }}>
-                {loading ? <><Loader2 size={16} className="animate-spin" /> Registering...</> : 'Confirm Registration'}
+                style={{
+                  padding: "0.9rem",
+                  borderRadius: "0.75rem",
+                  backgroundColor: "var(--brand)",
+                  color: "#fff",
+                  fontWeight: 700,
+                }}
+              >
+                {loading && <Loader2 size={16} className="animate-spin" />}
+                {loading ? "Registering..." : "Confirm Registration"}
               </motion.button>
-
-              <p className="text-center text-xs" style={{ color: 'var(--muted)' }}>
-                A ticket + QR code will be sent to your email.
-              </p>
             </form>
           )}
         </motion.div>
